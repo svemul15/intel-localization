@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+<html lang="arabic" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intel: Sustainability Through the Ages</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Add Bootstrap CSS for easy responsive columns -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Add Bootstrap Icons for simple icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
+  <!-- 
+    To support right-to-left languages like Arabic, 
+    set the 'dir' attribute to 'rtl' on the <html> tag:
+    <html lang="ar" dir="rtl">
+    The cards will automatically align text to the right.
+  -->
+
+  <!-- 
+    To switch between Arabic (RTL) and English (LTR):
+    For Arabic (right-to-left): <html lang="ar" dir="rtl">
+    For English (left-to-right): <html lang="en" dir="ltr">
+    The cards will automatically align text based on the direction.
+  -->
 
   <!-- Header / Hero Section -->
   <header>
@@ -135,5 +153,72 @@
     </div>
   </section>
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <!-- New Responsive Three-Column Section using Bootstrap -->
+  <!-- This section appears under the timeline cards -->
+  <div class="container my-5">
+    <div class="row text-center">
+      <!-- Column 1 -->
+      <div class="col-md-4 mb-4">
+        <i class="bi bi-globe2" style="font-size: 2.5rem; color: #0071c5;"></i>
+        <h4 class="mt-3">Global Impact</h4>
+        <p>
+          <!-- Short description for beginners -->
+          Intel's sustainability efforts reach communities and environments around the world.
+        </p>
+        <!-- Learn More button with hover effect -->
+        <a href="#" class="btn btn-primary learn-more-btn mt-3">Learn More</a>
+      </div>
+      <!-- Column 2 -->
+      <div class="col-md-4 mb-4">
+        <i class="bi bi-lightning-charge-fill" style="font-size: 2.5rem; color: #0071c5;"></i>
+        <h4 class="mt-3">Innovation</h4>
+        <p>
+          <!-- Short description for beginners -->
+          New technology and ideas help Intel reduce energy use and protect the planet.
+        </p>
+        <!-- Learn More button with hover effect -->
+        <a href="#" class="btn btn-primary learn-more-btn mt-3">Learn More</a>
+      </div>
+      <!-- Column 3 -->
+      <div class="col-md-4 mb-4">
+        <i class="bi bi-people-fill" style="font-size: 2.5rem; color: #0071c5;"></i>
+        <h4 class="mt-3">Collaboration</h4>
+        <p>
+          <!-- Short description for beginners -->
+          Working together with partners, Intel builds a more sustainable future for everyone.
+        </p>
+        <!-- Learn More button with hover effect -->
+        <a href="#" class="btn btn-primary learn-more-btn mt-3">Learn More</a>
+      </div>
+    </div>
+    <!-- Newsletter subscription section below the 3 columns -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8 text-center">
+        <!-- Subheader for newsletter -->
+        <h5 class="mb-3">Subscribe to our Sustainability Newsletter</h5>
+        <!-- Simple email form -->
+        <form class="d-flex justify-content-center flex-wrap" style="gap: 8px;">
+          <!-- Email input box -->
+          <input 
+            type="email" 
+            class="form-control" 
+            placeholder="Enter your email" 
+            style="max-width: 300px;" 
+            required
+          >
+          <!-- Subscribe button with hover effect -->
+          <button type="submit" class="btn btn-success subscribe-btn">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Footer at the bottom of the page -->
+  <footer class="text-center py-3" style="background: #00132b; color: #fff;">
+    <!-- Simple footer text for beginners -->
+    © 2025 Intel Corporation. All rights reserved.
+  </footer>
 </body>
 </html>

@@ -3,17 +3,26 @@
 /* Use a modern, clean font for the whole page */
 body {
   font-family: 'Segoe UI', 'Arial', sans-serif; /* Modern font stack */
-  background-color: #f4f8fb; /* Light background for contrast */
+  /* Cozy tech background: soft blue gradient with a subtle pattern overlay */
+  background: 
+    linear-gradient(135deg, #e3f0fa 0%, #c9e0f7 100%),
+    repeating-linear-gradient(
+      45deg,
+      #e6f2fb 0px,
+      #e6f2fb 2px,
+      #f4f8fb 2px,
+      #f4f8fb 10px
+    );
   margin: 0;
   padding: 0;
 }
 /* Make the hero section more blue and classy, and use a distinctive font */
 header {
-  /* Add Gemini_Intel_AI.png as a background image behind the hero section and headers */
+  /* High contrast: use a very dark blue background and bright white text */
   background:
-    linear-gradient(to bottom, #003366cc 60%, #005fa3cc 100%), /* Gradient overlay for readability */
+    linear-gradient(to bottom, #00132b 70%, #003366 100%), /* Darker gradient for more contrast */
     url('img/Gemini_Intel_AI.png') center/cover no-repeat; /* Gemini image as background */
-  color: #fff;
+  color: #fff; /* Bright white text for contrast */
   padding: 48px 0 44px 0;
   text-align: center;
   border-radius: 0 0 18px 18px; /* Rounded bottom corners */
@@ -31,6 +40,9 @@ header img {
   padding: 12px; /* Add space around the logo */
   border-radius: 16px; /* Rounded corners for the logo background */
   box-shadow: 0 2px 12px rgba(0,0,0,0.10); /* Extra shadow for emphasis */
+
+  /* Add a white border around the logo to make it stand out */
+  border: 4px solid #fff; /* White border, 4 pixels thick */
 }
 
 /* Modern headline style */
@@ -39,7 +51,7 @@ header h1 {
   margin: 12px 0 18px 0; /* Space above and below */
   font-weight: 700;
   letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle text shadow */
+  text-shadow: 0 3px 12px #00132b, 0 1px 0 #fff; /* Stronger shadow for readability */
 }
 
 /* Modern subheading style */
@@ -48,8 +60,9 @@ header p {
   max-width: 520px; /* Limit width for readability */
   margin: 0 auto; /* Center the paragraph */
   margin-bottom: 0; /* Remove extra space below */
-  color: #e3f2fd; /* Lighter blue for subheading */
+  color: #f8faff; /* Nearly white for best contrast */
   line-height: 1.6;
+  text-shadow: 0 2px 8px #00132b; /* Subtle shadow for clarity */
 }
 
 /* Timeline section styles */
@@ -81,6 +94,13 @@ section > div {
   position: relative;
   cursor: pointer; /* Show pointer on hover */
   scroll-snap-align: start; /* Each card snaps to the start of the scroll area */
+
+  /* Make all cards the same height so the page doesn't shift on hover */
+  height: 380px; /* Adjust this value if needed */
+  overflow: hidden; /* Hide anything that overflows the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Card hover effect */
@@ -162,6 +182,33 @@ section > div:hover .card-desc-full {
   display: inline;
 }
 
+/* Learn More button hover effect for the columns */
+.learn-more-btn {
+  transition: background 0.2s, color 0.2s;
+}
+
+/* When you hover over the button, it gets lighter and the text turns dark */
+.learn-more-btn:hover {
+  background: #fff;
+  color: #0071c5;
+  border: 1px solid #0071c5;
+}
+
+/* Hover effect for the Subscribe button */
+.subscribe-btn {
+  background: #0071c5; /* Intel blue */
+  color: #fff;
+  border: 1px solid #0071c5;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* When you hover over the Subscribe button, it gets lighter and the text turns blue */
+.subscribe-btn:hover {
+  background: #fff;
+  color: #0071c5;
+  border: 1px solid #0071c5;
+}
+
 /* Responsive: Stack timeline cards vertically on small screens */
 @media (max-width: 700px) {
   section {
@@ -177,5 +224,16 @@ section > div:hover .card-desc-full {
     width: 100%; /* Cards take full width */
     padding: 14px 10px 12px 10px;
     scroll-snap-align: none; /* No snap for vertical cards */
+    height: 340px; /* Keep same height on small screens */
   }
+}
+
+/* RTL support: Right-align card content when page direction is RTL (e.g., Arabic) */
+section:dir(rtl) > div {
+  text-align: right; /* Align all card text to the right */
+}
+
+/* LTR support: Left-align card content when page direction is LTR (e.g., English) */
+section:dir(ltr) > div {
+  text-align: left; /* Align all card text to the left */
 }

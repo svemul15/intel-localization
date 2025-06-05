@@ -10,6 +10,47 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Add Bootstrap Icons for simple icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script>
+    // This script checks the language and sets RTL or LTR direction automatically on page load
+    document.addEventListener("DOMContentLoaded", function() {
+      var htmlTag = document.documentElement;
+      if (htmlTag.lang === "ar" || htmlTag.lang === "arabic") {
+        htmlTag.setAttribute("dir", "rtl");
+      } else {
+        htmlTag.setAttribute("dir", "ltr");
+      }
+    });
+
+    // This script uses MutationObserver to detect language changes (e.g., by Google Translate)
+    // and updates the page direction (RTL/LTR) automatically.
+    // It uses a simple AI-like approach: if the html lang is Arabic or the body contains Arabic characters, set RTL.
+    function detectAndApplyRTL() {
+      var htmlTag = document.documentElement;
+      // Check for Arabic language code
+      var lang = htmlTag.lang.toLowerCase();
+      // Check for Arabic characters in the body text
+      var bodyText = document.body.innerText;
+      var hasArabic = /[\u0600-\u06FF]/.test(bodyText);
+
+      if (lang === "ar" || lang === "arabic" || hasArabic) {
+        htmlTag.setAttribute("dir", "rtl");
+      } else {
+        htmlTag.setAttribute("dir", "ltr");
+      }
+    }
+
+    // Observe changes to <html> lang attribute and <body> text (for Google Translate)
+    var observer = new MutationObserver(function(mutations) {
+      detectAndApplyRTL();
+    });
+
+    // Observe changes to the <html> tag and <body>
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+
+    // Also check periodically in case Google Translate changes content in a way MutationObserver misses
+    setInterval(detectAndApplyRTL, 1000);
+  </script>
 </head>
 <body>
   <!-- 
@@ -166,8 +207,14 @@
           <!-- Short description for beginners -->
           Intel's sustainability efforts reach communities and environments around the world.
         </p>
-        <!-- Learn More button with hover effect -->
-        <a href="#" class="btn btn-primary learn-more-btn mt-3">Learn More</a>
+        <!-- Learn More button opens the modal and passes info -->
+        <a href="#" class="btn btn-primary learn-more-btn mt-3" 
+           data-bs-toggle="modal" 
+           data-bs-target="#learnMoreModal"
+           data-title="Global Impact"
+           data-content="Intel's global impact includes environmental programs, community outreach, and worldwide sustainability initiatives.">
+          Learn More
+        </a>
       </div>
       <!-- Column 2 -->
       <div class="col-md-4 mb-4">
@@ -177,8 +224,13 @@
           <!-- Short description for beginners -->
           New technology and ideas help Intel reduce energy use and protect the planet.
         </p>
-        <!-- Learn More button with hover effect -->
-        <a href="#" class="btn btn-primary learn-more-btn mt-3">Learn More</a>
+        <a href="#" class="btn btn-primary learn-more-btn mt-3" 
+           data-bs-toggle="modal" 
+           data-bs-target="#learnMoreModal"
+           data-title="Innovation"
+           data-content="Intel drives innovation by developing energy-efficient products and sustainable manufacturing processes.">
+          Learn More
+        </a>
       </div>
       <!-- Column 3 -->
       <div class="col-md-4 mb-4">
@@ -188,8 +240,13 @@
           <!-- Short description for beginners -->
           Working together with partners, Intel builds a more sustainable future for everyone.
         </p>
-        <!-- Learn More button with hover effect -->
-        <a href="#" class="btn btn-primary learn-more-btn mt-3">Learn More</a>
+        <a href="#" class="btn btn-primary learn-more-btn mt-3" 
+           data-bs-toggle="modal" 
+           data-bs-target="#learnMoreModal"
+           data-title="Collaboration"
+           data-content="Collaboration with partners, governments, and communities helps Intel achieve its sustainability goals.">
+          Learn More
+        </a>
       </div>
     </div>
     <!-- Newsletter subscription section below the 3 columns -->
@@ -220,5 +277,55 @@
     <!-- Simple footer text for beginners -->
     © 2025 Intel Corporation. All rights reserved.
   </footer>
+
+  <!-- Google Translate language selector at the bottom right -->
+  <!-- This lets users pick their preferred language easily -->
+  <div id="google_translate_element" style="position: fixed; bottom: 18px; right: 18px; z-index: 9999;"></div>
+  <script type="text/javascript">
+    // Google Translate widget code
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Bootstrap Modal for Learn More -->
+  <!-- This modal pops up when a Learn More button is clicked -->
+  <div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="learnMoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal header with close button -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="learnMoreModalLabel">More Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Modal body for dynamic content -->
+        <div class="modal-body" id="learnMoreModalBody">
+          <!-- Content will be filled by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Bootstrap JS for modal functionality (place before </body>) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // This script updates the modal content based on which Learn More button is clicked
+    document.querySelectorAll('.learn-more-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(event) {
+        // Prevent default link behavior
+        event.preventDefault();
+        // Get the title and content from data attributes
+        var title = btn.getAttribute('data-title');
+        var content = btn.getAttribute('data-content');
+        // Set modal title and body
+        document.getElementById('learnMoreModalLabel').textContent = title;
+        document.getElementById('learnMoreModalBody').textContent = content;
+      });
+    });
+  </script>
 </body>
 </html>
